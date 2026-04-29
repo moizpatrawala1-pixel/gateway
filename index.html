@@ -46,7 +46,6 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 0 5%; 
 nav.scrolled { background: rgba(255,255,255,0.97); backdrop-filter: blur(16px); box-shadow: 0 1px 0 rgba(0,0,0,0.08); }
 .nav-inner { display: flex; justify-content: space-between; align-items: center; height: var(--nav-h); max-width: 1400px; margin: 0 auto; }
 .nav-logo img { height: 46px; width: auto; display: block; transition: filter .3s; }
-.nav-logo .logo-text { display: none; font-size: 1.3rem; font-family: var(--display); letter-spacing: .05em; color: var(--red); }
 nav:not(.scrolled) .nav-logo img { filter: brightness(0) invert(1); }
 .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
 .nav-links a { text-decoration: none; color: rgba(255,255,255,0.85); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color .2s; position: relative; padding-bottom: 3px; }
@@ -86,14 +85,15 @@ section { padding: 7rem 5%; scroll-margin-top: calc(var(--nav-h) + 38px); }
 .section-sub { color: #777; margin-top: 1rem; font-size: 0.95rem; line-height: 1.75; }
 .max-w { max-width: 1300px; margin: 0 auto; }
 
-/* ─── HERO ─── */
-/* UPDATED: Removed min-height and massive padding to fix the blank space */
-.hero { padding: 160px 5% 80px; background: var(--dark); display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; overflow: hidden; }
-.hero-noise { position: absolute; inset: 0; z-index: 0; opacity: .04; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E"); background-size: 200px 200px; }
-.hero-grid { position: absolute; inset: 0; z-index: 0; opacity: .03; background-image: repeating-linear-gradient(0deg,transparent,transparent 48px,#fff 48px,#fff 49px), repeating-linear-gradient(90deg,transparent,transparent 48px,#fff 48px,#fff 49px); }
-.hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle,rgba(168,28,32,0.2) 0%,transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 0; animation: heroFloat 6s ease-in-out infinite; }
-.hero-accent-top { position: absolute; top: 0; left: 0; right: 0; height: 3px; z-index: 2; background: linear-gradient(90deg,transparent,var(--red),var(--gold),var(--red),transparent); background-size: 200% auto; animation: gradientShift 4s linear infinite; }
+/* ─── HERO (THE BUG FIX IS HERE) ─── */
+.hero { padding: 140px 5% 80px; background: var(--dark); display: flex; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center; position: relative; overflow: hidden; }
 .hero > * { position: relative; z-index: 2; }
+/* Added !important to kill the invisible 600px deadspace block! */
+.hero-noise { position: absolute !important; inset: 0; z-index: 0; opacity: .04; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E"); background-size: 200px 200px; }
+.hero-grid { position: absolute !important; inset: 0; z-index: 0; opacity: .03; background-image: repeating-linear-gradient(0deg,transparent,transparent 48px,#fff 48px,#fff 49px), repeating-linear-gradient(90deg,transparent,transparent 48px,#fff 48px,#fff 49px); }
+.hero-glow { position: absolute !important; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle,rgba(168,28,32,0.2) 0%,transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 0; animation: heroFloat 6s ease-in-out infinite; }
+.hero-accent-top { position: absolute !important; top: 0; left: 0; right: 0; height: 3px; z-index: 2; background: linear-gradient(90deg,transparent,var(--red),var(--gold),var(--red),transparent); background-size: 200% auto; animation: gradientShift 4s linear infinite; }
+
 .hero-logo { width: 260px; height: auto; filter: brightness(0) invert(1); animation: heroFloat 6s ease-in-out 1s infinite; margin-bottom: 1.2rem; }
 .hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.8rem; font-weight: 600; animation: fadeUp .8s var(--ease-out) .2s both; }
 .hero h1 { font-family: var(--display); font-size: clamp(4rem, 9vw, 8.5rem); color: var(--white); line-height: .92; letter-spacing: 0.02em; text-transform: uppercase; margin-bottom: 1.5rem; animation: fadeUp .9s var(--ease-out) .35s both; }
@@ -228,7 +228,6 @@ section { padding: 7rem 5%; scroll-margin-top: calc(var(--nav-h) + 38px); }
 footer { background: var(--dark); padding: 2.5rem 5%; border-top: 1px solid rgba(255,255,255,0.04); }
 .footer-inner { display: flex; justify-content: space-between; align-items: center; max-width: 1300px; margin: 0 auto; flex-wrap: wrap; gap: 1rem; }
 .footer-logo img { height: 34px; filter: brightness(0) invert(1); opacity: 0.5; transition: opacity .2s; }
-.footer-logo .logo-text-footer { display: none; font-family: var(--display); font-size: 1.4rem; letter-spacing: .05em; color: rgba(255,255,255,0.35); }
 .footer-copy { font-size: 0.73rem; color: #3a3a3a; text-align: center; line-height: 1.6; }
 .footer-links { display: flex; gap: 1.5rem; }
 .footer-links a { font-size: 0.73rem; color: #3a3a3a; text-decoration: none; transition: color .2s; font-weight: 500; }
@@ -258,8 +257,7 @@ footer { background: var(--dark); padding: 2.5rem 5%; border-top: 1px solid rgba
 <nav id="mainNav">
   <div class="nav-inner">
     <div class="nav-logo">
-      <img src="logo.png" alt="Gateway Metal Industries" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-      <span class="logo-text">GMI</span>
+      <img src="logo.png" alt="Gateway Metal Industries" onerror="this.style.display='none';">
     </div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home" class="nav-link">Home</a></li>
@@ -287,8 +285,14 @@ footer { background: var(--dark); padding: 2.5rem 5%; border-top: 1px solid rgba
 </div>
 
 <header id="home" class="hero">
-  <div class="hero-noise"></div><div class="hero-grid"></div><div class="hero-glow"></div><div class="hero-accent-top"></div>
-  <img src="logo.png" class="hero-logo" alt="GMI" onerror="this.style.display='none'">
+  <div class="hero-noise"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-accent-top"></div>
+  
+  <div class="hero-logo-wrap">
+    <img src="logo.png" class="hero-logo" alt="GMI" onerror="this.style.display='none'">
+  </div>
   <p class="hero-eyebrow">Premium Metal Packaging Solutions</p>
   <h1>Forged<br>to <span>Last.</span></h1>
   <p class="hero-sub">"Delivering sustainable, innovative, and premium metal packaging solutions that stand the test of time."</p>
@@ -642,8 +646,7 @@ footer { background: var(--dark); padding: 2.5rem 5%; border-top: 1px solid rgba
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
-      <img src="logo.png" alt="GMI" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-      <span class="logo-text-footer">GMI</span>
+      <img src="logo.png" alt="GMI" onerror="this.style.display='none';">
     </div>
     <p class="footer-copy">© 2026 Gateway Metal Industries. All Rights Reserved.<br>Precision Tin Fabrication Since 1975</p>
     <div class="footer-links">
