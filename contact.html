@@ -61,13 +61,8 @@
   <div class="contact-grid">
     <div class="reveal-left">
       <div class="contact-details" style="margin-top: 0;">
-        <div class="c-detail">
-          <div class="c-detail-icon" aria-hidden="true">📍</div>
-          <div class="c-detail-text">
-            <strong>Headquarters</strong>
-            <span>A87, Maharashtra Industrial Area,<br>Taloja, Panvel, Maharashtra 410208</span>
-          </div>
-        </div>
+
+        <!-- PHONE -->
         <div class="c-detail">
           <div class="c-detail-icon" aria-hidden="true">📞</div>
           <div class="c-detail-text">
@@ -75,6 +70,8 @@
             <span><a href="tel:+917738486780">+91 77384 86780</a></span>
           </div>
         </div>
+
+        <!-- EMAIL -->
         <div class="c-detail">
           <div class="c-detail-icon" aria-hidden="true">✉️</div>
           <div class="c-detail-text">
@@ -82,6 +79,32 @@
             <span><a href="mailto:sales@gatewaymetalindustries.com">sales@gatewaymetalindustries.com</a></span>
           </div>
         </div>
+
+        <!-- ADDRESS + small map underneath -->
+        <div class="c-detail">
+          <div class="c-detail-icon" aria-hidden="true">📍</div>
+          <div class="c-detail-text">
+            <strong>Headquarters</strong>
+            <span>A87, Maharashtra Industrial Area,<br>Taloja, Panvel, Maharashtra 410208</span>
+            <div style="margin-top:0.9rem;border-radius:3px;overflow:hidden;border:1px solid rgba(255,255,255,0.07)">
+              <iframe
+                src="https://maps.app.goo.gl/vakVDUB9KiDfvoNs5"
+                width="100%"
+                height="150"
+                style="border:0;display:block;filter:grayscale(100%) invert(88%) contrast(82%)"
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Gateway Metal Industries Location">
+              </iframe>
+              <div style="padding:0.5rem 0.8rem;background:rgba(255,255,255,0.02);display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.05)">
+                <span style="font-size:0.63rem;letter-spacing:0.1em;text-transform:uppercase;color:#444;font-weight:600">Taloja, Maharashtra</span>
+                <a href="https://maps.app.goo.gl/vakVDUB9KiDfvoNs5" target="_blank" rel="noopener" style="font-size:0.63rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);text-decoration:none">Open in Maps →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -140,19 +163,6 @@
       </div>
     </div>
   </div>
-  
-  <div class="map-embed reveal">
-    <iframe 
-      src="https://maps.app.goo.gl/vakVDUB9KiDfvoNs5" 
-      width="100%" 
-      height="240" 
-      style="border:0;display:block" 
-      allowfullscreen="" 
-      loading="lazy" 
-      referrerpolicy="no-referrer-when-downgrade" 
-      title="Gateway Metal Industries Location">
-    </iframe>
-  </div>
 </section>
 
 <footer>
@@ -166,7 +176,6 @@
 </footer>
 
 <script>
-// Shared basic logic
 const prog = document.getElementById('progress-bar');
 window.addEventListener('scroll', () => {
   const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -193,14 +202,12 @@ const observer = new IntersectionObserver(e => e.forEach(entry => {
 }), {threshold: 0.1, rootMargin: '0px 0px -30px 0px'});
 document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
 
-// Toast helper
 function showToast(msg) {
   const t = document.getElementById('toastPopup');
   t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-// Contact Form Validation
 document.getElementById('submitBtn').addEventListener('click', () => {
   const nameEl = document.getElementById('f-name'), phoneEl = document.getElementById('f-phone'), emailEl = document.getElementById('f-email');
   const company = document.getElementById('f-company').value.trim(), ind = document.getElementById('f-industry').value, msg = document.getElementById('f-msg').value.trim();
