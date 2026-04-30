@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Contact Gateway Metal Industries. Request a custom quote for wholesale tin packaging, industrial chemical containers, and food storage tins.">
+<title>Contact Us | Request a Quote | Gateway Metal Industries</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div class="toast-popup" id="toastPopup"></div>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
+  <a href="index.html" class="mm-link">Home</a>
+  <a href="about.html" class="mm-link">About</a>
+  <a href="products.html" class="mm-link">Products</a>
+  <a href="contact.html" class="mm-link" style="color:var(--gold)">Contact Us</a>
+</div>
+
+<nav id="mainNav" role="navigation">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <a href="index.html"><img src="logo.png" alt="Gateway Metal Industries" onerror="this.style.display='none';"></a>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="products.html" class="nav-link">Products</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="ham" id="ham" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="marquee-bar" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>Precision Tin Fabrication</span><span class="dot">◆</span>
+    <span>FMCG & Pharma</span><span class="dot">◆</span>
+    <span>Since 1975</span><span class="dot">◆</span>
+    <span>Food & Spices Packaging</span><span class="dot">◆</span>
+    <span>Industrial Chemicals</span><span class="dot">◆</span>
+    <span>Worldwide Shipping</span><span class="dot">◆</span>
+  </div>
+</div>
+
+<header class="page-header">
+  <div class="max-w reveal">
+    <p class="section-tag" style="color:var(--gold)">Get In Touch</p>
+    <h1 class="section-title">Partner With Us</h1>
+    <p class="section-sub" style="color:#aaa; margin: 1rem auto 0; max-width: 600px;">Reach out to our engineering team for custom quotes, catalog inquiries, and bulk global orders.</p>
+  </div>
+</header>
+
+<section id="contact" class="contact" style="padding-top: 4rem;">
+  <div class="contact-grid">
+    <div class="reveal-left">
+      <div class="contact-details" style="margin-top: 0;">
+        <div class="c-detail">
+          <div class="c-detail-icon" aria-hidden="true">📍</div>
+          <div class="c-detail-text">
+            <strong>Headquarters</strong>
+            <span>A87, Maharashtra Industrial Area,<br>Taloja, Panvel, Maharashtra 410208</span>
+          </div>
+        </div>
+        <div class="c-detail">
+          <div class="c-detail-icon" aria-hidden="true">📞</div>
+          <div class="c-detail-text">
+            <strong>Phone</strong>
+            <span><a href="tel:+917738486780">+91 77384 86780</a></span>
+          </div>
+        </div>
+        <div class="c-detail">
+          <div class="c-detail-icon" aria-hidden="true">✉️</div>
+          <div class="c-detail-text">
+            <strong>Email</strong>
+            <span><a href="mailto:sales@gatewaymetalindustries.com">sales@gatewaymetalindustries.com</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap reveal-right">
+      <h3>Send an Inquiry</h3>
+      <div id="contactForm">
+        <div class="form-row">
+          <div class="form-field" id="field-company">
+            <label for="f-company">Company Name</label>
+            <input id="f-company" type="text" placeholder="Your company..." autocomplete="organization">
+          </div>
+          <div class="form-field" id="field-name">
+            <label for="f-name">Your Name <span style="color:var(--red)">*</span></label>
+            <input id="f-name" type="text" placeholder="Full name..." autocomplete="name">
+            <span class="error-msg">Please enter your name</span>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field" id="field-phone">
+            <label for="f-phone">Phone</label>
+            <input id="f-phone" type="tel" placeholder="+91..." autocomplete="tel" inputmode="tel">
+            <span class="error-msg">Please provide phone or email</span>
+          </div>
+          <div class="form-field" id="field-email">
+            <label for="f-email">Email</label>
+            <input id="f-email" type="email" placeholder="email@company.com" autocomplete="email" inputmode="email">
+            <span class="error-msg">Please enter a valid email</span>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="f-industry">Industry / Product Interest</label>
+          <select id="f-industry">
+            <option value="">Select your industry...</option>
+            <option>FMCG & Food Packaging</option>
+            <option>Industrial Paints & Adhesives</option>
+            <option>Industrial Dyes & Chemicals</option>
+            <option>Spices & Curry Powder</option>
+            <option>Custom Dimension Fabrication</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="f-msg">Message</label>
+          <textarea id="f-msg" placeholder="Tell us about your packaging requirements, expected volumes, etc..."></textarea>
+        </div>
+        <button type="button" class="btn-submit" id="submitBtn">Submit Inquiry</button>
+        <div class="form-toast" id="formToast">✓ Your inquiry has been prepared. Choose how to send it below.</div>
+        <div class="form-actions" id="formActions">
+          <a href="#" class="btn-wa" id="waBtn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 32 32" width="18" height="18" fill="white" aria-hidden="true"><path d="M16 2.67C8.63 2.67 2.67 8.63 2.67 16c0 2.37.62 4.6 1.7 6.5l-2.26 8.27 8.44-2.22A13.25 13.25 0 0016 29.33c7.37 0 13.33-5.96 13.33-13.33S23.37 2.67 16 2.67zM16 27.1a11.1 11.1 0 01-5.67-1.55l-.4-.24-4.21 1.11 1.13-4.1-.26-.43A11.1 11.1 0 014.88 16c0-6.14 5-11.12 11.12-11.12S27.12 9.86 27.12 16 22.14 27.1 16 27.1zm6.1-8.3c-.33-.17-1.97-.97-2.28-1.08-.3-.1-.53-.16-.76.17-.23.33-.86 1.08-1.06 1.3-.2.23-.4.26-.74.1-1.63-.8-2.8-1.74-3.86-3.6-.1-.17 0-.25.16-.42.15-.15.34-.39.5-.58.17-.2.23-.33.34-.56.1-.23.06-.43-.03-.6-.08-.17-.76-1.84-1.05-2.52-.28-.66-.56-.57-.76-.58h-.66c-.23 0-.6.08-.92.43-.33.35-1.25 1.22-1.25 2.98 0 1.76 1.28 3.46 1.46 3.7.16.23 2.53 3.86 6.13 5.41 2.45 1.06 3.32 1.15 4.38.96 1.05-.2 3.16-1.3 3.6-2.55.44-1.26.44-2.33.3-2.56-.12-.23-.46-.36-.8-.53z"/></svg>
+            Send via WhatsApp
+          </a>
+          <a href="#" class="btn-email-direct" id="emailBtn">
+            ✉ Send via Email
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="map-embed reveal">
+    <iframe 
+      src="https://maps.app.goo.gl/vakVDUB9KiDfvoNs5" 
+      width="100%" 
+      height="240" 
+      style="border:0;display:block" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade" 
+      title="Gateway Metal Industries Location">
+    </iframe>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo"><img src="logo.png" alt="Gateway Metal Industries" onerror="this.style.display='none';"></div>
+    <p class="footer-copy">© 2026 Gateway Metal Industries. All Rights Reserved.<br>Precision Tin Fabrication Since 1975</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a><a href="about.html">Company</a><a href="products.html">Products</a><a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Shared basic logic
+const prog = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = (max > 0 ? (document.documentElement.scrollTop / max * 100) : 0) + '%';
+}, { passive: true });
+
+const ham = document.getElementById('ham'), mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  if(menuOpen){
+    mobileMenu.style.display = 'flex'; requestAnimationFrame(() => mobileMenu.classList.add('open'));
+    ham.classList.add('open'); document.body.style.overflow = 'hidden';
+  } else {
+    mobileMenu.classList.remove('open'); ham.classList.remove('open');
+    document.body.style.overflow = ''; setTimeout(() => { if (!menuOpen) mobileMenu.style.display = 'none'; }, 400);
+  }
+}
+ham.addEventListener('click', toggleMenu);
+document.getElementById('mobileClose').addEventListener('click', toggleMenu);
+
+const observer = new IntersectionObserver(e => e.forEach(entry => {
+  if(entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+}), {threshold: 0.1, rootMargin: '0px 0px -30px 0px'});
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+// Toast helper
+function showToast(msg) {
+  const t = document.getElementById('toastPopup');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// Contact Form Validation
+document.getElementById('submitBtn').addEventListener('click', () => {
+  const nameEl = document.getElementById('f-name'), phoneEl = document.getElementById('f-phone'), emailEl = document.getElementById('f-email');
+  const company = document.getElementById('f-company').value.trim(), ind = document.getElementById('f-industry').value, msg = document.getElementById('f-msg').value.trim();
+  const name = nameEl.value.trim(), phone = phoneEl.value.trim(), email = emailEl.value.trim();
+
+  document.querySelectorAll('.form-field').forEach(f => f.classList.remove('error'));
+  let valid = true;
+
+  if (!name) { document.getElementById('field-name').classList.add('error'); valid = false; }
+  if (!phone && !email) { document.getElementById('field-phone').classList.add('error'); document.getElementById('field-email').classList.add('error'); valid = false; }
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('field-email').classList.add('error'); valid = false; }
+
+  if (!valid) {
+    const firstErr = document.querySelector('.form-field.error input');
+    if (firstErr) firstErr.focus();
+    return;
+  }
+
+  const text = `Hello, I am interested in partnering with Gateway Metal Industries.\n\n*Company:* ${company || '—'}\n*Name:* ${name}\n*Phone:* ${phone || '—'}\n*Email:* ${email || '—'}\n*Industry:* ${ind || '—'}\n*Message:* ${msg || '—'}`;
+  document.getElementById('waBtn').href = `https://wa.me/917738486780?text=${encodeURIComponent(text)}`;
+  document.getElementById('emailBtn').href = `mailto:sales@gatewaymetalindustries.com?subject=${encodeURIComponent('Inquiry from ' + name)}&body=${encodeURIComponent(text.replace(/\*/g, ''))}`;
+
+  document.getElementById('formToast').style.display = 'block';
+  document.getElementById('formActions').style.display = 'flex';
+  showToast('✓ Inquiry ready — choose how to send it below');
+});
+</script>
+</body>
+</html>

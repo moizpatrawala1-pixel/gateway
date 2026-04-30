@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Learn about Gateway Metal Industries. Crafting premium tin packaging since 1975 in Taloja, Maharashtra.">
+<title>Our Heritage | Gateway Metal Industries</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
+  <a href="index.html" class="mm-link">Home</a>
+  <a href="about.html" class="mm-link" style="color:var(--gold)">About</a>
+  <a href="products.html" class="mm-link">Products</a>
+  <a href="contact.html" class="mm-link">Contact Us</a>
+</div>
+
+<nav id="mainNav" role="navigation">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <a href="index.html"><img src="logo.png" alt="Gateway Metal Industries" onerror="this.style.display='none';"></a>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="about.html" class="nav-link active">About</a></li>
+      <li><a href="products.html" class="nav-link">Products</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="ham" id="ham" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="marquee-bar" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>Precision Tin Fabrication</span><span class="dot">◆</span>
+    <span>FMCG & Pharma</span><span class="dot">◆</span>
+    <span>Since 1975</span><span class="dot">◆</span>
+    <span>Food & Spices Packaging</span><span class="dot">◆</span>
+    <span>Industrial Chemicals</span><span class="dot">◆</span>
+    <span>Worldwide Shipping</span><span class="dot">◆</span>
+  </div>
+</div>
+
+<header class="page-header">
+  <div class="max-w reveal">
+    <p class="section-tag" style="color:var(--gold)">Our History</p>
+    <h1 class="section-title">The Gateway Legacy</h1>
+    <p class="section-sub" style="color:#aaa; margin: 1rem auto 0; max-width: 600px;">Decades of precision engineering, trust, and premium metal packaging.</p>
+  </div>
+</header>
+
+<section id="heritage" class="heritage">
+  <div class="heritage-img reveal-left">
+    <span class="big-year" aria-hidden="true">1975</span>
+    <div class="heritage-icon-row" aria-hidden="true">
+      <div class="h-icon-box"><svg width="44" height="44" fill="none" viewBox="0 0 48 48"><rect x="8" y="14" width="32" height="24" rx="1" stroke="#C69C3D" stroke-width="1.5"/><rect x="14" y="8" width="20" height="8" stroke="#C69C3D" stroke-width="1.5"/><line x1="24" y1="14" x2="24" y2="38" stroke="#C69C3D" stroke-width="1.5"/></svg></div>
+      <div class="h-icon-box"><svg width="44" height="44" fill="none" viewBox="0 0 48 48"><circle cx="24" cy="24" r="14" stroke="#C69C3D" stroke-width="1.5"/><circle cx="24" cy="24" r="6" stroke="#C69C3D" stroke-width="1.5"/><line x1="24" y1="10" x2="24" y2="14" stroke="#C69C3D" stroke-width="1.5"/><line x1="24" y1="34" x2="24" y2="38" stroke="#C69C3D" stroke-width="1.5"/></svg></div>
+    </div>
+  </div>
+  <div class="heritage-content reveal-right">
+    <p class="section-tag">Since Day One</p>
+    <h2 class="section-title">Crafting Tins for<br>Generations</h2>
+    <div class="heritage-divider"></div>
+    <p>Founded by <strong>Ismail Sulemanji Patrawala</strong> in 1975 in a modest factory in Lower Parel, Gateway Metal Industries was built on the core belief that packaging is a reflection of trust, durability, and care.</p>
+    <p>As a leading metal tin packaging supplier, we expanded and shifted operations to a state-of-the-art facility in Taloja in 2009. Today, we proudly serve hundreds of customers worldwide — from FMCG and pharmaceuticals to food colours, saffron, spices, and industrial adhesives.</p>
+    <a href="contact.html" class="btn-gold" style="align-self:flex-start;margin-top:2.5rem">Partner With Us</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo"><img src="logo.png" alt="Gateway Metal Industries" onerror="this.style.display='none';"></div>
+    <p class="footer-copy">© 2026 Gateway Metal Industries. All Rights Reserved.<br>Precision Tin Fabrication Since 1975</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="products.html">Products</a><a href="contact.html">Contact Us</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Shared basic logic
+const prog = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = (max > 0 ? (document.documentElement.scrollTop / max * 100) : 0) + '%';
+}, { passive: true });
+
+const ham = document.getElementById('ham'), mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  if(menuOpen){
+    mobileMenu.style.display = 'flex';
+    requestAnimationFrame(() => mobileMenu.classList.add('open'));
+    ham.classList.add('open'); document.body.style.overflow = 'hidden';
+  } else {
+    mobileMenu.classList.remove('open'); ham.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => { if (!menuOpen) mobileMenu.style.display = 'none'; }, 400);
+  }
+}
+ham.addEventListener('click', toggleMenu);
+document.getElementById('mobileClose').addEventListener('click', toggleMenu);
+
+const observer = new IntersectionObserver(e => e.forEach(entry => {
+  if(entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+}), {threshold: 0.1, rootMargin: '0px 0px -30px 0px'});
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
