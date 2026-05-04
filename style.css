@@ -247,12 +247,14 @@ footer { background: var(--dark); padding: 2.5rem 5%; border-top: 1px solid rgba
   justify-content: center;
   align-items: center;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s;
 }
 
 .lightbox.active {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
 }
 
