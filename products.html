@@ -298,17 +298,33 @@
 </footer>
 
 <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Product Zoom">
-  <button class="lightbox-close" id="lightboxClose" aria-label="Close zoom">✕</button>
-  
-  <div class="lightbox-content">
-    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous Image">❮</button>
-    
-    <div class="lb-img-wrap">
-      <img id="lightboxImg" src="" alt="Product Zoomed">
-      <div id="lightboxCaption" class="lightbox-caption"></div>
+
+  <div class="lb-backdrop" id="lbBackdrop"></div>
+
+  <div class="lb-panel">
+
+    <div class="lb-topbar">
+      <div class="lb-counter" id="lbCounter"></div>
+      <button class="lb-close" id="lightboxClose" aria-label="Close">✕</button>
     </div>
 
-    <button class="lb-nav lb-next" id="lbNext" aria-label="Next Image">❯</button>
+    <div class="lb-stage">
+      <button class="lb-arrow" id="lbPrev" aria-label="Previous">❮</button>
+      <div class="lb-img-frame">
+        <img id="lightboxImg" src="" alt="Product view">
+      </div>
+      <button class="lb-arrow" id="lbNext" aria-label="Next">❯</button>
+    </div>
+
+    <div class="lb-caption">
+      <div class="lb-caption-left">
+        <p class="lb-title" id="lbTitle"></p>
+        <p class="lb-dims" id="lbDims"></p>
+        <div class="lb-thumbs" id="lbThumbs"></div>
+      </div>
+      <a href="contact.html" class="lb-cta">Request Details</a>
+    </div>
+
   </div>
 </div>
 
@@ -362,72 +378,119 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   });
 });
 
-// Lightbox Logic (With Gallery Navigation)
-const lightbox = document.getElementById('lightbox');
-const lbImg = document.getElementById('lightboxImg');
-const lbCap = document.getElementById('lightboxCaption');
+// Lightbox — Premium Version
+const lightbox   = document.getElementById('lightbox');
+const lbImg      = document.getElementById('lightboxImg');
+const lbTitle    = document.getElementById('lbTitle');
+const lbDims     = document.getElementById('lbDims');
+const lbCounter  = document.getElementById('lbCounter');
+const lbThumbs   = document.getElementById('lbThumbs');
 
 let currentImages = [];
-let currentIndex = 0;
-let currentTitle = '';
-let currentDims = '';
+let currentIndex  = 0;
 
-function updateLightboxView() {
-  lbImg.src = currentImages[currentIndex].src;
-  lbCap.innerHTML = `<strong>${currentTitle}</strong><br>${currentDims}
-                     <br><span style="font-size:0.7rem; color:#888; margin-top:8px; display:block; letter-spacing: 0.1em; text-transform: uppercase;">
-                        Image ${currentIndex + 1} of ${currentImages.length}
-                     </span>`;
+function buildDots() {
+  lbCounter.innerHTML = '';
+  currentImages.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'lb-dot' + (i === currentIndex ? ' active' : '');
+    d.setAttribute('aria-label', 'Image ' + (i + 1));
+    d.addEventListener('click', () => goTo(i));
+    lbCounter.appendChild(d);
+  });
 }
 
-document.querySelectorAll('.prod-img-wrap').forEach(wrap => {
-  wrap.style.cursor = 'zoom-in';
-  wrap.addEventListener('click', () => {
-    const card = wrap.closest('.prod-card');
-    currentTitle = card.querySelector('h3').textContent;
-    currentDims = card.querySelector('.prod-dims').textContent;
-    
-    // Grab all images in the clicked container
-    currentImages = Array.from(wrap.querySelectorAll('img'));
-    currentIndex = 0; // Reset to the first image
-    
-    updateLightboxView();
-    lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden';
+function buildThumbs() {
+  lbThumbs.innerHTML = '';
+  currentImages.forEach((img, i) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'lb-thumb' + (i === currentIndex ? ' active' : '');
+    const t = document.createElement('img');
+    t.src = img.src;
+    t.alt = img.alt;
+    t.loading = 'lazy';
+    wrap.appendChild(t);
+    wrap.addEventListener('click', () => goTo(i));
+    lbThumbs.appendChild(wrap);
   });
-});
+}
 
-// Next Button
-document.getElementById('lbNext').addEventListener('click', (e) => {
-  e.stopPropagation(); // Prevents the click from closing the background
-  if(currentImages.length > 0) {
-    currentIndex = (currentIndex + 1) % currentImages.length;
-    updateLightboxView();
-  }
-});
+function goTo(index) {
+  currentIndex = (index + currentImages.length) % currentImages.length;
 
-// Previous Button
-document.getElementById('lbPrev').addEventListener('click', (e) => {
-  e.stopPropagation();
-  if(currentImages.length > 0) {
-    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-    updateLightboxView();
-  }
-});
+  lbImg.classList.add('switching');
+  setTimeout(() => {
+    lbImg.src = currentImages[currentIndex].src;
+    lbImg.alt = currentImages[currentIndex].alt;
+    lbImg.classList.remove('switching');
+  }, 180);
 
-// Close functionality
-document.getElementById('lightboxClose').addEventListener('click', () => {
+  // Update dots
+  lbCounter.querySelectorAll('.lb-dot').forEach((d, i) =>
+    d.classList.toggle('active', i === currentIndex));
+
+  // Update thumbs
+  lbThumbs.querySelectorAll('.lb-thumb').forEach((t, i) =>
+    t.classList.toggle('active', i === currentIndex));
+}
+
+function openLightbox(wrap) {
+  const card = wrap.closest('.prod-card');
+  lbTitle.textContent = card.querySelector('h3').textContent;
+  lbDims.textContent  = card.querySelector('.prod-dims').textContent;
+
+  currentImages = Array.from(wrap.querySelectorAll('img'));
+  currentIndex  = 0;
+
+  lbImg.src = currentImages[0].src;
+  lbImg.alt = currentImages[0].alt;
+
+  buildDots();
+  buildThumbs();
+
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
   lightbox.classList.remove('active');
   document.body.style.overflow = '';
+}
+
+// Click to open
+document.querySelectorAll('.prod-img-wrap').forEach(wrap => {
+  wrap.style.cursor = 'zoom-in';
+  wrap.addEventListener('click', () => openLightbox(wrap));
 });
 
-lightbox.addEventListener('click', (e) => {
-  // Only close if clicking the dark background, not the image or buttons
-  if (e.target === lightbox || e.target === document.querySelector('.lightbox-content')) {
-    lightbox.classList.remove('active');
-    document.body.style.overflow = '';
-  }
+document.getElementById('lbNext').addEventListener('click', e => {
+  e.stopPropagation();
+  goTo(currentIndex + 1);
 });
+
+document.getElementById('lbPrev').addEventListener('click', e => {
+  e.stopPropagation();
+  goTo(currentIndex - 1);
+});
+
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+document.getElementById('lbBackdrop').addEventListener('click', closeLightbox);
+
+// Keyboard nav
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('active')) return;
+  if (e.key === 'ArrowRight') goTo(currentIndex + 1);
+  if (e.key === 'ArrowLeft')  goTo(currentIndex - 1);
+  if (e.key === 'Escape')     closeLightbox();
+});
+
+// Touch swipe support
+let touchStartX = 0;
+lightbox.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+lightbox.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 50) goTo(currentIndex + (dx < 0 ? 1 : -1));
+}, { passive: true });
 </script>
 </body>
 </html>
