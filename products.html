@@ -355,19 +355,22 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   });
 });
 
-// Lightbox Logic
+// Lightbox Logic (FIXED: Targets the wrapper, captures the first image)
 const lightbox = document.getElementById('lightbox');
 const lbImg = document.getElementById('lightboxImg');
 const lbCap = document.getElementById('lightboxCaption');
 
-document.querySelectorAll('.prod-img-wrap img').forEach(img => {
-  img.style.cursor = 'zoom-in';
-  img.addEventListener('click', () => {
-    const card = img.closest('.prod-card');
-    const title = card.querySelector('h3').innerText;
-    const dims = card.querySelector('.prod-dims').innerText;
+document.querySelectorAll('.prod-img-wrap').forEach(wrap => {
+  wrap.style.cursor = 'zoom-in';
+  wrap.addEventListener('click', () => {
+    const card = wrap.closest('.prod-card');
+    const title = card.querySelector('h3').textContent;
+    const dims = card.querySelector('.prod-dims').textContent;
     
-    lbImg.src = img.src; // Using current src, replace with high-res path if you have them
+    // Always grab the primary (first) image source, regardless of animation state
+    const firstImg = wrap.querySelector('img');
+    
+    lbImg.src = firstImg.src; 
     lbCap.innerHTML = `<strong>${title}</strong><br>${dims}`;
     
     lightbox.classList.add('active');
