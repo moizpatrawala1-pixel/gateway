@@ -299,9 +299,16 @@
 
 <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Product Zoom">
   <button class="lightbox-close" id="lightboxClose" aria-label="Close zoom">✕</button>
+  
   <div class="lightbox-content">
-    <img id="lightboxImg" src="" alt="Product Zoomed">
-    <div id="lightboxCaption" class="lightbox-caption"></div>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous Image">❮</button>
+    
+    <div class="lb-img-wrap">
+      <img id="lightboxImg" src="" alt="Product Zoomed">
+      <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
+
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Next Image">❯</button>
   </div>
 </div>
 
@@ -355,37 +362,68 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   });
 });
 
-// Lightbox Logic (FIXED: Targets the wrapper, captures the first image)
+// Lightbox Logic (With Gallery Navigation)
 const lightbox = document.getElementById('lightbox');
 const lbImg = document.getElementById('lightboxImg');
 const lbCap = document.getElementById('lightboxCaption');
+
+let currentImages = [];
+let currentIndex = 0;
+let currentTitle = '';
+let currentDims = '';
+
+function updateLightboxView() {
+  lbImg.src = currentImages[currentIndex].src;
+  lbCap.innerHTML = `<strong>${currentTitle}</strong><br>${currentDims}
+                     <br><span style="font-size:0.7rem; color:#888; margin-top:8px; display:block; letter-spacing: 0.1em; text-transform: uppercase;">
+                        Image ${currentIndex + 1} of ${currentImages.length}
+                     </span>`;
+}
 
 document.querySelectorAll('.prod-img-wrap').forEach(wrap => {
   wrap.style.cursor = 'zoom-in';
   wrap.addEventListener('click', () => {
     const card = wrap.closest('.prod-card');
-    const title = card.querySelector('h3').textContent;
-    const dims = card.querySelector('.prod-dims').textContent;
+    currentTitle = card.querySelector('h3').textContent;
+    currentDims = card.querySelector('.prod-dims').textContent;
     
-    // Always grab the primary (first) image source, regardless of animation state
-    const firstImg = wrap.querySelector('img');
+    // Grab all images in the clicked container
+    currentImages = Array.from(wrap.querySelectorAll('img'));
+    currentIndex = 0; // Reset to the first image
     
-    lbImg.src = firstImg.src; 
-    lbCap.innerHTML = `<strong>${title}</strong><br>${dims}`;
-    
+    updateLightboxView();
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
   });
 });
 
+// Next Button
+document.getElementById('lbNext').addEventListener('click', (e) => {
+  e.stopPropagation(); // Prevents the click from closing the background
+  if(currentImages.length > 0) {
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    updateLightboxView();
+  }
+});
+
+// Previous Button
+document.getElementById('lbPrev').addEventListener('click', (e) => {
+  e.stopPropagation();
+  if(currentImages.length > 0) {
+    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    updateLightboxView();
+  }
+});
+
+// Close functionality
 document.getElementById('lightboxClose').addEventListener('click', () => {
   lightbox.classList.remove('active');
   document.body.style.overflow = '';
 });
 
-// Close on background click
 lightbox.addEventListener('click', (e) => {
-  if (e.target === lightbox) {
+  // Only close if clicking the dark background, not the image or buttons
+  if (e.target === lightbox || e.target === document.querySelector('.lightbox-content')) {
     lightbox.classList.remove('active');
     document.body.style.overflow = '';
   }
